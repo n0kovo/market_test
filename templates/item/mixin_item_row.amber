@@ -1,0 +1,48 @@
+mixin itemRow($viewItem, $viewUser, $l)
+  div.ui.segment
+    h3.ui.header.dividing[href="/user/"+$viewItem.User.Username+"/item/"+$viewItem.Uuid]
+      if $viewItem.ScoreFloat > 0.0
+        div.ui.label.floated.right
+          i.icon.thumbs.up
+          span #{$viewItem.ScoreFloat} / 5
+      | #{$viewItem.Name}
+    div.ui.two.column.grid
+      div.ui.column.center.aligned
+        div.ui.image
+          a[href="/user/"+$viewItem.User.Username+"/item/"+$viewItem.Uuid]
+            img.ui.image.x300.rounded[src="/item-image/"+$viewItem.Uuid+"?size=300x300"]
+      div.ui.column
+        if len($viewItem.GroupPackages) > 0
+          each $group in $viewItem.GroupPackages
+            a.ui.labeled.button.tiny.fluid[href="/user/"+$viewItem.User.Username+"/item/"+$viewItem.Uuid]
+              div.ui.dark-green.basic.tiny.button.fluid.left.aligned
+                | #{$group.PackageName}
+              div.ui.basic.teal.left.pointing.label.tiny.price
+                if $viewUser.Currency == "USD"
+                  #{$group.PriceUSDStr} USD
+                if $viewUser.Currency == "BTC"
+                  #{$group.PriceBTCStr} BTC
+                if $viewUser.Currency == "ETH"
+                  #{$group.PriceETHStr} ETH
+                if $viewUser.Currency == "RUB"
+                  #{$group.PriceRUBStr} RUB
+                if $viewUser.Currency == "AUD"
+                  #{$group.PriceAUDStr} AUD
+                if $viewUser.Currency == "GBP"
+                  #{$group.PriceGBPStr} GBP
+                if $viewUser.Currency == "EUR"
+                  #{$group.PriceEURStr} EUR
+            div.spacer
+    div.ui.section.divider
+    $ic = $viewItem.ItemCategory
+    div
+      if $l == "ru" && $ic.NameRu != ""
+        span.ui.teal.tiny.label.tag.right.floated #{$ic.NameRu}
+      else if $ic.NameEn != ""
+        span.ui.teal.tiny.label.tag.right.floated #{$ic.NameEn}
+    div.h50 #{$viewItem.ShortDescriptionHTML}
+    div.ui.section.divider
+    div.ui.comments
+      import ./../store/mixin_vendor_row
+      $v = $viewItem.ViewSeller
+      +vendorRow($v, $l)

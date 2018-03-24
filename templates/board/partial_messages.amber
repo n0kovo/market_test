@@ -1,0 +1,23 @@
+$user = ViewUser
+$selected = SelectedSection
+div.ui.comments
+  $ViewUser = ViewUser
+  each $ViewThread in ViewThreads
+    $message = $ViewThread.LastMessage
+    div.comment
+      [class="active"] ? $ViewThread.Uuid == $selected
+      a.avatar
+        [href="/messages/"+$ViewThread.TitleUser.Username] 
+        img[src="/user-avatar/" + $ViewThread.TitleUser.Username + "?size=small"]
+      div.content
+        span.ui.label.right.floated.tiny.circular
+          [class="dark-green"] ? !$ViewThread.IsRead
+          | #{$ViewThread.NumberOfMessages}
+        a.author[href="/messages/"+$ViewThread.TitleUser.Username] 
+          span @#{$ViewThread.TitleUser.Username}
+        div.metadata
+          span.date #{$message.CreatedAtStr}
+        div
+          if $ViewThread.LastMessageByTitleUser
+            span.from-author @#{$message.SenderUser.Username}:
+          pre #{$message.ShortText}

@@ -1,0 +1,18 @@
+extends ./layout
+
+block left_menu
+  +leftMenu("shoutbox")
+
+block content
+    div.ui.grid.divided
+        div.thirteen.wide.column
+            div.segment.ui
+                import ./board/partial_thread.amber
+        div.three.wide.column.t-left-menu-items
+            div.ui.vertical.fluid.menu.tiny.secondary
+                a.item[href="?section=shoutbox"] 
+                    [class="active"] ? SelectedSection == "shoutbox"
+                    | #{Localization.LeftMenu.Shoutbox}
+                a.item[href="?section=news"]
+                    [class="active"] ? SelectedSection == "news"
+                    | Market News

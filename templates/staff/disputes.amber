@@ -1,0 +1,37 @@
+extends ./../layout
+
+block left_menu
+  +leftMenu("staff")
+
+block content
+  $viewUser = ViewUser
+  $localization = Localization
+  div.ui.divided.grid
+    div.twelve.wide.column
+      div.segment.ui
+        h2.ui.header.dividing #{Localization.Dispute.Disputes}
+        if len(ViewTransactions) > 0
+          import ./../dispute/partial_list.amber
+        else
+          div.ui.icon.message
+            i.icon.payment
+            div.content
+              div.header #{Localization.Dispute.NoDisputes}
+              p #{Localization.Dispute.NoDisputesDescription}
+    div.four.wide.column.t-left-menu-items
+      import ./mixin_staff_menu
+      $localization = Localization
+      +staffMenu($localization, "disputes")
+      div.ui.vertical.menu.tiny.basic.fluid.secondary
+        a.item.red[href="?status=open"]
+          [class="active"] ? SelectedStatus=="open"
+          | OPEN
+        a.item.teal[href="?status=closed"]
+          [class="active"] ? SelectedStatus=="closed"
+          | CLOSED
+        a.item.violet[href="?status=vendor"]
+          [class="active"] ? SelectedStatus=="vendor"
+          | RESOLVED TO VENDOR
+        a.item.dark-green[href="?status=buyer"]
+          [class="active"] ? SelectedStatus=="buyer"
+          | RESOLVED TO BUYER

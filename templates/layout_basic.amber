@@ -1,0 +1,101 @@
+doctype 5
+html
+  head
+    link[rel="stylesheet"][type="text/css"][href="/css/semantic.css"]
+    link[rel="stylesheet"][type="text/css"][href="/css/tochka.css"]
+    title t•chka free market
+    meta[name="viewport"][content="width=device-width, initial-scale=1"]
+    block meta
+  body
+    div.ui.page.grid
+      div.sixteen.wide.column
+        div.ui.grid
+          div.three.wide.column
+            div.ui.menu.tiny.vertical.secondary.fluid
+              a.item.header-logo.header[href="/"]
+                if Language == "ru" || ViewUser.Language == "ru"
+                  span Т
+                  span.dark-green •
+                  span чка
+                else
+                  span P
+                  span.dark-green •
+                  span int
+          div.thirteen.wide.column
+            div.ui.message.info
+              p.word-wrap 
+                | Official Tochka HiddenServiceV3 address:
+                a[href="http://iyf3xi4gbq4tkfzjzlm725awhjbnajc7fp7gb5umcehmbt2mxq2eyfid.onion"] iyf3xi4gbq4tkfzjzlm725awhjbnajc7fp7gb5umcehmbt2mxq2eyfid.onion 
+      div.sixteen.wide.column
+        div.tochka-container.ui.grid.divided
+          div.three.wide.column.tochka-left.menu   
+            div.ui.menu.tiny.vertical.secondary.fluid
+              a.item[href="/auth/register"]
+                [class="active"] ? SelectedSection == "register"
+                i.ui.icon.edit
+                | #{Localization.Layout.Register}
+              a.item[href="/auth/login"]
+                [class="active"] ? SelectedSection == "login"
+                i.ui.icon.sign.in
+                | #{Localization.Layout.Login}
+            div.ui.section.divider.left-menu
+            div.ui.menu.fluid.tiny
+              div.ui.simple.dropdown.item.fluid
+                if Language == "ru" 
+                  i.russia.flag
+                  | Русский
+                if Language == "en" || Language == ""
+                  i.united.kingdom.flag
+                  | English
+                if Language == "fr"
+                  i.france.flag
+                  | Français
+                if Language == "de"
+                  i.germany.flag
+                  | Deutsche
+                if Language == "es"
+                  i.spain.flag
+                  | Español
+                if Language == "rs"
+                  i.serbia.flag
+                  | Srpski
+                if Language == "tr"
+                  i.turkey.flag
+                  | Türkçe
+                if Language == "it"
+                  i.italy.flag
+                  | Italiano
+                div.menu.fluid
+                  a.item.fluid[href="?language=de"] 
+                    i.germany.flag
+                    | Deutsche
+                  a.item.fluid[href="?language=en"] 
+                    i.united.kingdom.flag
+                    | English
+                  a.item.fluid[href="?language=es"] 
+                    i.spain.flag
+                    | Español
+                  a.item.fluid[href="?language=fr"] 
+                    i.france.flag
+                    | Français
+                  a.item.fluid[href="?language=it"] 
+                    i.italy.flag
+                    | Italiano
+                  a.item.fluid[href="?language=ru"] 
+                    i.russia.flag
+                    | Русский
+                  a.item.fluid[href="?language=rs"] 
+                    i.serbia.flag
+                    | Srpski
+                  a.item.fluid[href="?language=tr"] 
+                    i.turkey.flag
+                    | Türkçe
+          div.thirteen.wide.column
+            block content
+        div.ui.vertical.footer.segment.center.aligned
+          p 
+            span Tochka is 
+            a[href="http://qxklmrhx7qkzais6.onion/Tochka/tochka-free-market"] Open-Source Software 
+            span subject to the MIT License
+            br
+            a[href="http://o5zprxcyb6btgulmxdxuo7u2f3j32d65bt6wxu542r2hap65fgsx5nyd.onion/"] Tochka Foundation

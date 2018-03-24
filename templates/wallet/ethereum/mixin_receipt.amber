@@ -1,0 +1,27 @@
+mixin paymentReceipt($prs)
+  each $a in $prs
+    div.ui.message
+      div.ui.form
+        div.field
+          label Tx Hash
+          pre.word-break #{$a.Hash}
+        div.ui.section.divider
+        div.field
+          label Raw TX
+          pre.word-break #{$a.RawTx}                          
+        div.ui.section.divider
+        div.field
+          label From
+          span.label.ui.bitcoin.id.tiny #{$a.WalletFrom}   
+        div.ui.section.divider
+        div.field
+          label To
+          span.label.ui.bitcoin.id.tiny #{$a.WalletTo}
+        div.ui.section.divider
+        div.field
+          label Amount
+          pre.word-break #{$a.Amount} 
+        div.ui.section.divider
+        div.field
+          label Fee
+          span #{$a.Cost}

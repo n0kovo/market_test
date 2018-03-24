@@ -1,0 +1,11 @@
+extends ./../layout
+
+block header
+
+block content
+  div.segment
+    div.container
+        div.introduction
+          h1.ui.dividing.header #{Package.Name}
+          p #{Package.PriceBTC}
+  div.main.container

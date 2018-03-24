@@ -1,0 +1,82 @@
+mixin itemRow($viewItem, $viewUser, $localization, $SingleMode)
+  div.ui.segment
+    h3.ui.header.dividing
+      a[href="/user/"+$viewItem.VendorUsername+"/item/"+$viewItem.ItemUuid]
+        if $viewItem.ItemScore > 0.0
+          div.ui.label.floated.right
+            i.icon.thumbs.up
+            span #{$viewItem.ItemScore} / 5
+        | #{$viewItem.ItemName}
+    div.ui.image.fluid.x230
+      a[href="/user/" + $viewItem.VendorUsername + "/item/" + $viewItem.ItemUuid]
+        img.ui.image.x230.rounded.centered[src="/item-image/" + $viewItem.ItemUuid + "?size=230x230"]
+    div.ui.section.divider
+    div
+        a.ui.large.left.labeled.fluid.button[href="/user/" + $viewItem.VendorUsername + "/item/" + $viewItem.ItemUuid]
+          span.ui.basic.right.pointing.label.fluid
+            if $viewItem.PriceStr == ""
+              each $i, $price in $viewItem.PriceRangeStr
+                | #{$price}
+                if $i == 0
+                  |  - 
+            else
+              | #{$viewItem.PriceStr}
+            | #{$viewUser.Currency}
+          span.ui.button
+            if $viewItem.Type == "mail"
+              #{$localization.Items.Mail}
+            if $viewItem.Type == "digital"
+              #{$localization.Items.Digital}
+            if $viewItem.Type == "drop"
+              #{$localization.Items.Drop}
+            if $viewItem.Type == "drop preorder"
+              #{$localization.Items.DropPreorder}
+    div.ui.section.divider
+    div.h50 #{$viewItem.ItemDescription}
+    if !$SingleMode
+      div.ui.section.divider
+      div.ui.comments
+        div.comment
+          [class="premium"] ? $viewItem.Premium || $viewItem.PremiumPlus
+          a.avatar[href="/user/"+$viewItem.VendorUsername]
+            img[src="/user-avatar/" + $viewItem.VendorUsername + "?size=small"]
+          div.content
+            a.author[href="/user/" + $viewItem.VendorUsername] 
+              if $viewItem.IsOnline
+                i.icon.dark-green.circle
+              | @#{$viewItem.VendorUsername}
+            div.text
+              if $viewItem.PremiumPlus
+                div.metadata
+                  div.ui.teal.label.tiny #{$localization.UserCard.PremiumVendor}+
+              else if $viewItem.Premium
+                div.metadata
+                  div.ui.dark-green.label.tiny #{$localization.UserCard.PremiumVendor}
+              else
+                div.metadata
+                  div.ui.purple.label.tiny #{$localization.UserCard.Vendor}
+              if $viewItem.SellerScore > 0
+                div.metadata
+                  div.ui.label.tiny
+                    i.icon.thumbs.up
+                    span #{$viewItem.SellerScore} / 5
+              if $viewItem.BitcoinMultisigPublicKeyEnabled
+                div.metadata
+                  div.ui.label.tiny 
+                    i.icon.bitcoin
+                    span Multisig
+      div.ui.section.divider
+      div.metadata
+        i.icon.wait
+        span #{$localization.UserCard.Registred} #{$viewItem.RegistrationDateStr} 
+      div.metadata
+        i.icon.wait
+        span #{$localization.UserCard.LastSeen} #{$viewItem.LastLoginDateStr}
+      div.ui.section.divider
+      div.extra.content
+      div.metadata 
+        i.icon.bitcoin
+        span #{$localization.Items.SalesAmount}: #{$viewItem.ItemBitcoinTxNumberStr}
+      div.metadata 
+        i.icon.bitcoin
+        span #{$localization.Items.SalesVolume}: #{$viewItem.ItemBitcoinTxVolumeStr}

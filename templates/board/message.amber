@@ -1,0 +1,12 @@
+extends ./../layout
+
+block left_menu
+  +leftMenu("messages")
+
+block content
+  div.ui.two.column.grid.divided
+    div.six.wide.column
+      import ./partial_messages
+    div.ten.wide.column
+      div.ui.segment
+        import ./partial_thread

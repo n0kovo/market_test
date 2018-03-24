@@ -1,0 +1,81 @@
+extends ./../layout
+
+block left_menu
+  +leftMenu("staff")
+
+block content
+  $viewUser = ViewUser
+  $localization = Localization
+  div.ui.divided.grid
+    div.twelve.wide.column
+      div.ui.horizontal.menu.tiny.secondary.basic.fluid       
+        a.item[href="?section=uncontacted"]
+          [class="active"] ? SelectedSection=="uncontacted"
+          | Last message by user
+        a.item[href="?section=contacted"]
+          [class="active"] ? SelectedSection=="contacted"
+          | Last message by staff
+      if len(ViewExtendedUsers) > 0
+        table.ui.table.basic
+          thead
+            tr.center.aligned
+              th Username
+              th 
+                span Registration
+                br
+                span Last Seen
+              th 
+              th Supporter
+              th
+          tbody
+            each $user in ViewExtendedUsers
+                td
+                  a[href="/user/"+$user.Username] 
+                    img.ui.mini.circular.image.right.floated[src="/user-avatar/"+$user.Username+"?size=small"]
+                    | @#{$user.Username}
+                  br
+                  if $user.IsSeller
+                    if $user.PremiumPlus
+                      div.ui.teal.label.tiny #{$localization.UserCard.PremiumVendor}+
+                    else if $user.Premium
+                      div.ui.dark-green.label.tiny #{$localization.UserCard.PremiumVendor}
+                    else
+                      div.ui.label.tiny #{$localization.UserCard.Vendor}
+                  else
+                    div.ui.label.tiny #{$localization.UserCard.Buyer}
+                td
+                  i.icon.time
+                  | #{$user.RegistrationDateStr}
+                  br
+                  i.icon.time
+                  | #{$user.LastLoginDateStr}
+                td
+                  $lang=$user.Language
+                  if $lang == "en"
+                    i.flag.us
+                  else
+                    i.flag[class=$lang]
+                td
+                  if $user.SupportUserUsername != ""
+                    a[href="/user/"+$user.SupportUserUsername] @#{$user.SupportUserUsername}
+                td
+                  a.ui.labeled.button.tiny[href="/staff/users/"+$user.Username+"/support"]
+                    div.ui.button.tiny Support
+                      [class="red"] ? !$user.LastMessageByStaff
+                      [class="green"] ? $user.LastMessageByStaff
+                    div.ui.basic.left.pointing.label.tiny #{$user.NumberOfSupportMessages-1}
+        if len(Pages) > 1
+          div.ui.section.divider   
+          div.ui.pagination.menu
+            $selected = SelectedPage
+            $section = SelectedSection
+            each $page in Pages
+              div.item 
+                .active ? $page == $selected
+                a[href="?page="+$page+"&section="+$section] #{$page}
+      else
+        div.ui.message No users to contact yet
+    div.four.wide.column.t-left-menu-items
+      import ./mixin_staff_menu
+      $localization = Localization
+      +staffMenu($localization, "support")

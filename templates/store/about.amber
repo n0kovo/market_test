@@ -1,0 +1,93 @@
+extends ./../layout
+
+block left_menu
+  +leftMenu("sellers")
+
+block content
+  $l = Localization
+  $v = ViewSeller
+  $viewUser = ViewUser
+  div.ui.divided.grid
+    div.twelve.wide.column
+      div.segment.ui
+        h3.ui.dividing.header #{Localization.AboutUser.About}
+        if ViewSeller.LongDescriptionHTML != ""
+          div.ui.container #{ViewSeller.LongDescriptionHTML}
+        else
+          div.ui.icon.message
+            i.icon.info
+            div.content
+              div.header #{Localization.AboutUser.AboutEmpty}
+              p #{Localization.AboutUser.AboutEmptyDescription}
+      if ViewSeller.Bitmessage != "" || ViewSeller.Tox != "" || ViewSeller.Tox != "" || ViewSeller.Pgp != ""
+        div.ui.form.segment.contacts
+          h3.ui.dividing.header #{Localization.AboutUser.ContactInformation}
+          if ViewSeller.Bitmessage != ""
+            div.field
+              label Bitmessage
+              input[readonly][type="text"][value=ViewSeller.Bitmessage]
+          if ViewSeller.Tox != ""
+            div.field
+              label Tox
+              input[readonly][type="text"][value=ViewSeller.Tox]
+          if ViewSeller.Email != ""
+            div.field
+              label Email
+              input[readonly][type="text"][value=ViewSeller.Email]
+          if ViewSeller.Pgp != ""
+            div.field
+              label PGP
+              pre #{ViewSeller.Pgp}
+      if ViewSeller.IsTrustedSeller
+        div.ui.segment
+          h3.ui.dividing.header
+            i.icon.star
+            | #{Localization.UserCard.TrustedSeller}
+          div.ui.comments
+            $ViewThread = ViewThread
+            each $message in ViewThread.Messages
+              if $message.Text != ""
+                div.comment
+                  if $message.SenderUser.Uuid != ""
+                    a.avatar
+                      img[src="/user-avatar/" + $message.SenderUser.Username]
+                  else
+                    span.avatar
+                  div.content
+                    if $message.SenderUser.Uuid != ""
+                      a.author[href="/user/"+$message.SenderUser.Username] 
+                        span @#{$message.SenderUser.Username}
+                        if $message.SenderUser.IsAdmin
+                          div.ui.tiny.label.red Admin
+                        if $message.SenderUser.Premium
+                          div.ui.tiny.label.teal Premium
+                        if $message.SenderUser.PremiumPlus
+                          div.ui.tiny.label.dark-green Premium+
+                        if $message.SenderUser.IsStaff
+                          div.ui.tiny.label.violet Staff
+                    else
+                      span.author.admin T•chka
+                    div.metadata
+                      span.date #{$message.CreatedAtStr}
+                    pre #{$message.Text}
+                    if $message.HasImage
+                      img.ui.large.image[src="/board/message/" + $message.Uuid + "/image"]
+      if len(ViewSeller.ShippingOptions) > 0
+        div.ui.segment
+          h3.ui.dividing.header #{Localization.AboutUser.ShippingOptions}
+          table.ui.table.striped.three.columns
+            thead
+              th #{Localization.AboutUser.Name}
+              th #{Localization.AboutUser.PriceUSD}
+            tbody
+              each $option in ViewSeller.ShippingOptions
+                tr
+                  td #{$option.Name}
+                  td #{$option.PriceUSD}
+    div.four.wide.column.t-left-menu-items
+      $l = Localization
+      $v = ViewSeller
+      $t = ViewThread
+      import ./../store/mixin_user_menu
+      +userMenu($v, $t, $l, "about")
+

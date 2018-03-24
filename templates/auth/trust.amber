@@ -1,0 +1,29 @@
+extends ./../layout
+
+block left_menu
+  +leftMenu("support")
+
+block content
+  div.ui.grid.divided
+    div.twelve.wide.column
+      $l = Localization
+      div.segment.ui
+        h3.ui.dividing.header FAQ
+        pre #{Localization.TrustedVendor}
+      div.segment.ui
+        import ./../board/partial_thread.amber
+    div.four.wide.column.t-left-menu-items
+      if ViewUser.IsStaff || ViewUser.IsAdmin
+        $l = Localization
+        $v = ViewSeller
+        $t = ViewThread
+        import ./../store/mixin_user_menu
+        +userMenu($v, $t, $l, "trust")
+        div.ui.section.divider.left-menu
+      if !ViewSeller.HasRequestedVerification
+        form[method="POST"]
+          input[type="hidden"][name="request_trusted_vendor"][value="request_trusted_vendor"]
+          button.ui.button.tiny.fluid.teal.basic[type="submit"] Request Trusted Vendor Stastus
+      else
+        div.ui.message.dark-green Verification Request Pending
+      

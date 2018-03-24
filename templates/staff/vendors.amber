@@ -1,0 +1,56 @@
+extends ./../layout
+
+block left_menu
+  +leftMenu("staff")
+
+block content
+  $viewUser = ViewUser
+  $localization = Localization
+  div.ui.divided.grid
+    div.twelve.wide.column
+      div.ui.horizontal.menu.tiny.secondary.basic.fluid
+        a.item[href="?section=all"]
+          [class="active"] ? SelectedSection=="all"
+          | All
+          span.ui.label.tiny #{NumberOfVendors}
+        a.item[href="?section=free"]
+          [class="active"] ? SelectedSection=="free"
+          | Free
+          span.ui.label.tiny #{NumberOfVendorsFree}
+        a.item[href="?section=premium"]
+          [class="active"] ? SelectedSection=="premium"
+          | Premium
+          span.ui.label.tiny #{NumberOfVendorsPremium}
+        a.item[href="?section=premium_plus"]
+          [class="active"] ? SelectedSection=="premium_plus"
+          | Premium+
+          span.ui.label.tiny #{NumberOfVendorsPremiumPlus}
+      table.ui.table
+        thead
+          tr
+            th Username
+            th Registration
+            th Last Login
+            th Verification Request
+        tbody
+          each $user in ViewUsers
+            tr
+              td 
+                a[href="/user/"+$user.Username] @#{$user.Username}
+                br
+                if $user.Premium 
+                  span.ui.label.tiny.dark-green Premium
+                if $user.PremiumPlus
+                  span.ui.label.tiny.teal Premium+
+                if $user.IsTrustedSeller
+                  span.ui.label.tiny Trusted
+              td #{$user.RegistrationDateStr}
+              td #{$user.LastLoginDateStr}
+              td
+                if $user.HasRequestedVerification
+                  i.icon.plus
+                a.ui.button.mini.dark-green[href="/staff/vendors/"+$user.Username] Verify
+    div.four.wide.column.t-left-menu-items
+      import ./mixin_staff_menu
+      +staffMenu($localization, "vendors")
+      

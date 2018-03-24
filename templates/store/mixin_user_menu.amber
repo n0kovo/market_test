@@ -1,0 +1,28 @@
+mixin userMenu($seller, $thread, $localization, $menu_section)
+  import ./mixin_vendor_card_expanded
+  +vendorCard($seller, $localization)
+  if $seller.IsSeller
+    div.ui.vertical.menu.tiny.basic.fluid.secondary
+      a.item[href="/user/"+$seller.Username + "/about"] 
+        [class="active"] ? "about" == $menu_section
+        i.icon.info
+        | #{$localization.AboutUser.About}
+      if len($seller.RatingReviews) > 0
+        a.item[href="/user/"+$seller.Username + "/reviews"]
+          [class="active"] ? "reviews" == $menu_section
+          i.icon.thumbs.up
+          span.ui.label.tiny #{len($seller.RatingReviews)}
+          | #{$localization.LeftMenu.Reviews}
+      a.item[href="/user/"+$seller.Username] 
+        [class="active"] ? "items" == $menu_section
+        i.icon.cart
+        span.ui.label.tiny #{len($seller.Items)}
+        | #{$localization.LeftMenu.Items}
+      a.item[href="/user/"+$seller.Username + "/board"] 
+        [class="active"] ? "board" == $menu_section
+        i.icon.comments
+        span.ui.label.tiny #{len($thread.Messages)}
+        | #{$localization.LeftMenu.Board}
+  if ViewUser.IsStaff || ViewUser.IsAdmin
+    import ./../staff/mixin_user_menu
+    +userMenu($seller, "", $localization)

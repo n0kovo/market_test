@@ -1,0 +1,34 @@
+doctype 5
+html
+  head
+    link[rel="stylesheet"][type="text/css"][href="/css/semantic.css"]
+    link[rel="stylesheet"][type="text/css"][href="/css/tochka.css"]
+    title t•chka free market
+    meta[name="viewport"][content="width=device-width, initial-scale=1"]
+    block meta
+  body
+    div.ui.page.grid
+      div.sixteen.wide.column
+        div.ui.grid
+          div.three.wide.column
+            div.ui.menu.tiny.vertical.secondary.fluid
+              a.item.header-logo.header[href="/"]
+                if Language == "ru" || ViewUser.Language == "ru"
+                  span Т
+                  span.dark-green •
+                  span чка
+                else
+                  span P
+                  span.dark-green •
+                  span int
+          div.thirteen.wide.column
+      div.sixteen.wide.column
+        block content
+        div.ui.vertical.footer.segment.center.aligned
+          p 
+            span Tochka is 
+            a[href="http://qxklmrhx7qkzais6.onion/Tochka/tochka-free-market"] Open-Source Software 
+            span subject to the MIT License
+            br
+            a[href="http://o5zprxcyb6btgulmxdxuo7u2f3j32d65bt6wxu542r2hap65fgsx5nyd.onion/"] Tochka Foundation
+            

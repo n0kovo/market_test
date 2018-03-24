@@ -1,0 +1,250 @@
+mixin leftMenu($section)
+  if ViewUser.Uuid != ""
+    if ViewUser.IsSeller && !IsSingleMode
+      div.ui.vertical.buttons
+        if !ViewUser.Premium && !ViewUser.PremiumPlus
+          a.ui.fluid.orange.button.tiny.basic[href="/account"] #{Localization.Layout.PremiumAd}
+        if !ViewUser.IsTrustedSeller
+          a.ui.fluid.dark-green.button.tiny[href="/trust"] Become Trusted Vendor
+    div.ui.menu.tiny.vertical.secondary.fluid
+      a.item[href="/marketplace"]
+        [class="active"] ? $section == "items"
+        i.ui.icon.shop
+        | #{Localization.Layout.Marketplace}
+      if !IsSingleMode
+        a.item[href="/vendors"]
+          [class="active"] ? $section == "sellers"
+          i.ui.icon.users
+          | #{Localization.Layout.Vendors}
+        a.item[href="/shoutbox"]
+          [class="active"] ? $section == "shoutbox"
+          | #{Localization.LeftMenu.Shoutbox}
+          i.icon.comments.outline
+      a.item[href="/feed"]
+        [class="active"] ? $section == "feed"
+        | #{Localization.LeftMenu.Feed}
+        i.icon.feed
+      a.item[href="/help"]
+        [class="active"] ? $section == "help"
+        i.ui.icon.info
+        | #{Localization.Layout.Help}
+      if ViewUser.IsStaff || ViewUser.IsAdmin
+         a.ui.item.red[href="/staff/users"]
+          i.ui.icon.users
+          strong #{Localization.Staff.Staff} 
+    div.ui.section.divider.left-menu
+    div.ui.menu.tiny.vertical.secondary.fluid
+      a.item[href="/payments"]
+        [class="active"] ? $section == "transactions"
+        | #{Localization.LeftMenu.Orders}
+        span.ui.label.tiny #{NumberOfTransactions}
+      if NumberOfDisputes > 0
+        a.item[href="/dispute"]
+          [class="active"] ? $section == "disputes"
+          | #{Localization.LeftMenu.Disputes}
+          span.ui.label.tiny #{NumberOfDisputes}
+      a.item[href="/messages"]
+        [class="active"] ? $section == "messages"
+        | #{Localization.LeftMenu.PMs}
+        if NumberOfUnreadPrivateMessages > 0
+          span.ui.tiny.teal.label #{NumberOfUnreadPrivateMessages}
+        else
+          span.ui.label.tiny #{NumberOfPrivateMessages}
+      a.ui.item[href="/support"]
+        [class="active"] ? $section == "support"
+        | #{Localization.LeftMenu.Support}
+        if NumberOfUnreadSupportMessages > 0
+          span.ui.tiny.teal.label #{NumberOfUnreadSupportMessages}
+        else
+          span.ui.label.tiny #{NumberOfSupportMessages}
+  div.ui.section.divider.left-menu
+  $userCurrency = ViewUser.Currency
+  div.ui.menu.tiny.vertical.secondary.fluid
+    span.item
+      strong Currency Rates
+    each $fiatCurreny, $rates in CurrencyRates
+      if $fiatCurreny == $userCurrency
+        each $cryptoCurrency, $ccRate in $rates
+          span.item
+            | #{$ccRate} 
+            span.ui.label.tiny.dark-green #{$cryptoCurrency}
+  div.ui.menu.fluid.tiny
+    div.ui.simple.dropdown.item.fluid
+      strong #{ViewUser.Currency}
+      div.menu.fluid
+        each $fiatCurreny, $rates in CurrencyRates
+          a.item.fluid[href="/settings/currency/"+$fiatCurreny]
+            strong #{$fiatCurreny}
+            each $cryptoCurrency, $ccRate in $rates
+              div.cryptoRate
+                strong #{$cryptoCurrency}
+                span #{$ccRate} 
+  div.ui.section.divider.left-menu
+  div.ui.menu.fluid.tiny
+    div.ui.simple.dropdown.item.fluid
+      if ViewUser.Language == "ru" 
+        i.russia.flag
+        | Русский
+      if ViewUser.Language == "rs"
+        i.serbia.flag
+        | Srpski
+      if ViewUser.Language == "en"
+        i.united.kingdom.flag
+        | English
+      if ViewUser.Language == "fr"
+        i.france.flag
+        | Français
+      if ViewUser.Language == "it"
+        i.italy.flag
+        | Italiano     
+      if ViewUser.Language == "de"
+        i.germany.flag
+        | Deutsche
+      if ViewUser.Language == "es"
+        i.spain.flag
+        | Español
+      if ViewUser.Language == "tr"
+        i.turkey.flag
+        | Türkçe        
+      div.menu.fluid
+        a.item.fluid[href="/settings/language/de"] 
+          i.germany.flag
+          | Deutsche
+        a.item.fluid[href="/settings/language/en"] 
+          i.united.kingdom.flag
+          | English
+        a.item.fluid[href="/settings/language/es"] 
+          i.spain.flag
+          | Español
+        a.item.fluid[href="/settings/language/fr"] 
+          i.france.flag
+          | Français
+        a.item.fluid[href="/settings/language/it"] 
+          i.italy.flag
+          | Italiano
+        a.item.fluid[href="/settings/language/ru"] 
+          i.russia.flag
+          | Русский
+        a.item.fluid[href="/settings/language/rs"] 
+          i.serbia.flag
+          | Srpski
+        a.item.fluid[href="/settings/language/tr"] 
+          i.turkey.flag
+          | Türkçe
+  if len(Advertisings) > 0 
+    div.segment.ui.word-break
+      each $ad in Advertisings
+        if $ad.Status
+          div.segment.secondary.ui
+            strong #{$ad.Item.Name}
+            br
+            a[href="/user/"+$ad.Item.User.Username+"/item/"+$ad.ItemUuid] #{$ad.Comment}
+doctype 5
+html
+  head
+    link[rel="stylesheet"][type="text/css"][href="/css/semantic.css"]
+    link[rel="stylesheet"][type="text/css"][href="/css/tochka.css"]
+    title t•chka free market
+    meta[name="viewport"][content="width=device-width, initial-scale=1"]
+    block meta
+  body
+    if ViewUser.IsAdmin
+      div.ui.inverted.red.menu.admin
+        a.item[href="/auth/admin/users"]
+          i.icon.users
+        a.item[href="/payments/admin/list"]
+          i.icon.payment
+        a.item[href="/referrals/admin"]
+          i.icon.bitcoin
+        a.item[href="/support/admin"]
+          i.icon.ticket.up
+        a.item[href="/dispute/admin/list"]
+          i.icon.exclamation
+        a.item[href="/messages/admin"]
+          i.icon.chat
+        a.item[href="/staff/item_categories"]
+          i.icon.sitemap
+        a.item[href="/messageboard_sections/admin"]
+          i.icon.folder
+        a.item[href="/staff/advertising"]
+          i.icon.adn
+    div.ui.page.grid
+      div.sixteen.wide.column
+        div.ui.grid
+          div.three.wide.column
+            div.ui.menu.tiny.vertical.secondary.fluid
+              a.item.header-logo.header[href="/"]
+                if Language == "ru" || ViewUser.Language == "ru"
+                  span Т
+                  span.dark-green •
+                  span чка
+                else
+                  span P
+                  span.dark-green •
+                  span int
+          div.thirteen.wide.column
+            div.ui.grid
+              div.twelve.wide.column
+                  a.teal.ui.button[href="http://o5zprxcyb6btgulmxdxuo7u2f3j32d65bt6wxu542r2hap65fgsx5nyd.onion/ico/whitepaper"] Tochka Foundation ICO
+              div.two.wide.column
+              div.two.wide.column.user-menu-container
+                  img.ui.image.circular.right.floated[src="/user-avatar/" + ViewUser.Username + "?size=small"]
+                  div.ui.segment.user-menu
+                    h3.ui.dividing.header 
+                      img.ui.image.circular[src="/user-avatar/" + ViewUser.Username + "?size=small"]
+                      | @#{ViewUser.Username}
+                    div.ui.menu.tiny.vertical.secondary.fluid
+                      a.item[href="/user/"+ViewUser.Username]
+                        i.icon.user
+                        | My Profile
+                      a.item[href="/profile"]
+                        i.ui.icon.settings
+                        | #{Localization.Layout.Settings}
+                      a.item[href="/referrals"]
+                        i.icon.level.up
+                        | #{Localization.LeftMenu.Referrals}
+                    div.ui.section.divider
+                    div.ui.menu.tiny.vertical.secondary.fluid
+                      span.item
+                        strong #{Localization.Layout.Wallet}
+                      a.item[href="/wallet/bitcoin_cash/receive"]
+                        | Bitcoin Cash
+                        span.ui.label.tiny.dark-green #{UserBitcoinCashBalance.Balance} 
+                      a.item[href="/wallet/bitcoin/receive"]
+                        | Bitcoin
+                        span.ui.label.tiny.dark-green #{UserBitcoinBalance.Balance} 
+                      a.item[href="/wallet/ethereum/receive"]
+                        | Ethereum
+                        span.ui.label.tiny.dark-green #{UserEthereumBalance.Balance} 
+                    if ViewUser.IsSeller && ViewUser.IsTrustedSeller
+                      div.ui.section.divider
+                      div.ui.fluid.buttons.vertical
+                        a.ui.button.tiny.fluid[href="/seller/"+ViewUser.Username+"/item/new/edit"]
+                          i.icon.plus
+                          | #{Localization.Items.AddItem}
+                        a.ui.button.tiny.fluid[href="/seller/"+ViewUser.Username+"/advertisings"]
+                          i.icon.adn
+                          | Advertisings
+                    div.ui.section.divider
+                    form.ui.form[action="/auth/logout"][method="post"]
+                      button.ui.button.red.fluid.tiny[type="submit"]
+                        i.icon.sign.out.fluid
+                        | #{Localization.LeftMenu.SignOut}
+      div.sixteen.wide.column
+        div.tochka-container.ui.grid.divided
+          if ViewUser.Uuid != ""
+            div.three.wide.column.tochka-left.menu
+              if ViewUser.Pgp == "" && ViewUser.IsSeller
+                div.ui.message
+                  a[href="/profile?section=system"] Set up PGP! Otherwise your items wont be visible to buyers   
+              block left_menu
+          div.thirteen.wide.column
+            [class="sixteen wide"] ? ViewUser.Uuid == ""
+            block content
+        div.ui.vertical.footer.segment.center.aligned
+          p 
+            span Tochka is 
+            a[href="http://qxklmrhx7qkzais6.onion/Tochka/tochka-free-market"] Open-Source Software 
+            span subject to the MIT License
+            br
+            a[href="http://o5zprxcyb6btgulmxdxuo7u2f3j32d65bt6wxu542r2hap65fgsx5nyd.onion/"] Tochka Foundation

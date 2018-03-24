@@ -1,0 +1,108 @@
+extends ./../layout
+
+block left_menu
+  +leftMenu("settings")
+
+block content
+  div.ui.divided.grid.centered
+    div.twelve.wide.column
+      div.ui.segment
+        h3.ui.dividing.header Account
+        table.ui.celled.table
+          thead
+            tr
+              th
+              th Free
+              th Premium
+              th Premium+ 
+          tbody
+            tr
+              td
+                strong Commission Rate
+              td 10%
+              td 5%
+              td 2%
+            tr
+              td
+                strong Finalize Early (FE)
+              td no
+              td yes
+              td yes
+            tr
+              td
+                strong Referral percent
+              td 10% revenue share
+              td 45% revenue share
+              td 45% revenue share
+            tr
+              td
+                strong Number of items
+              td up to 5
+              td unlimited
+              td unlimited
+            tr
+              td 
+                strong Number of packages
+              td up to 5 per item
+              td unlimited
+              td unlimited
+            tr
+              td
+                strong Price
+              td Free
+              td $50 (#{50.0/USDBTCRate} BTC)
+              td $100 (#{100.0/USDBTCRate} BTC)
+          tfoot
+            tr
+              td[colspan="5"]
+                p To purchase Premium or Premium+ deposit needed amount to your wallet
+        form.ui.form[method="post"]
+          [class="error"] ? Error
+          if Error
+            div.ui.error.message
+              div.header #{Localization.Auth.Error}
+              p #{Error}
+            div.ui.section.divider
+          div.field
+            div.grouped.inline.fields
+              div.field
+                div.ui.radio.checkbox
+                  input[name="type"][id="type_1"][type="radio"][value="premium"][checked]
+                  label[for="type_1"] Premium ($50 / #{50.0/USDBTCRate} BTC)
+              div.field
+                div.ui.radio.checkbox
+                  input[name="type"][id="type_2"][type="radio"][value="premium_plus"][checked]
+                  label[for="type_2"] Premium Plus ($100 / #{100.0/USDBTCRate} BTC)
+          div.ui.section.divider
+          button.ui.button.icon.dark-green[type="submit"]
+            | Purchase
+    div.four.wide.column.t-left-menu-items
+      div.ui.vertical.fluid.menu.basic.tiny.secondary
+        a.item.active[href="/account"] 
+          i.icon.privacy
+          | #{Localization.Settings.Account}
+        a.item[href="/profile?section=profile"] 
+          [class="active"] ? SelectedSection == "profile"
+          i.icon.user
+          | #{Localization.Settings.Profile}
+        a.item[href="/profile?section=contacts"]
+          [class="active"] ? SelectedSection == "contacts"
+          i.icon.mail.square
+          | #{Localization.Settings.Contacts}
+        a.item[href="/profile?section=payments"]
+          [class="active"] ? SelectedSection == "payments"
+          i.icon.bitcoin
+          | #{Localization.Settings.Payments}
+        a.item[href="/profile?section=system"]
+          [class="active"] ? SelectedSection == "system"
+          i.icon.settings
+          | #{Localization.Settings.Encryption}
+        a.item[href="/profile?section=password"]
+          [class="active"] ? SelectedSection == "password"
+          i.icon.privacy
+          | #{Localization.Settings.Password}
+        if ViewUser.IsSeller
+          a.item[href="/profile?section=vendor"]
+            [class="active"] ? SelectedSection == "vendor"
+            i.icon.cart
+            | #{Localization.Settings.VendorSettings}

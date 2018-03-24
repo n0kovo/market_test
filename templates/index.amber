@@ -1,0 +1,44 @@
+extends ./layout_basic
+
+block left_menu
+  +leftMenu("")
+
+block content
+	div.introduction
+		div.stackable.very.relaxed.ui.grid.container.ui
+			div.row
+				div.eight.wide.column
+					h1.ui.icon.header.center.aligned
+						i.icon.dark-green.circle
+					h2.ui.header.center.aligned #{Localization.Index.WelcomeToTochka}
+					p #{Localization.Index.WelcomeToTochkaDescription}
+				div.eight.wide.column
+					h1.ui.icon.header.center.aligned
+						i.icon.dark-green.exchange
+					h2.ui.header.center.aligned #{Localization.Index.Referrals}
+					p #{Localization.Index.ReferralsDescription}
+				div.eight.wide.column
+			div.ui.section.divider
+			div.row
+				div.eight.wide.column
+					h1.ui.icon.header.center.aligned
+						i.icon.dark-green.bitcoin
+					h2.ui.header.center.aligned #{Localization.Index.EscrowAndMultisig}
+					p.center.aligned #{Localization.Index.EscrowAndMultisigDescription}
+				div.eight.wide.column
+					h1.ui.icon.header.center.aligned
+						i.icon.dark-green.users
+					h2.ui.header.center.aligned #{Localization.Index.ActiveCommunity}
+					p.center.aligned #{Localization.Index.ActiveCommunityDescription}
+			div.ui.section.divider
+			div.row
+				div.eight.wide.column
+					h1.ui.icon.header.center.aligned
+						i.icon.dark-green.doctor
+					h2.ui.header.center.aligned #{Localization.Index.Support}
+					p #{Localization.Index.SupportDescription}
+				div.eight.wide.column
+					h1.ui.icon.header.center.aligned
+						i.icon.dark-green.shop
+					h2.ui.header.center.aligned #{Localization.Index.Vendors}
+					p #{Localization.Index.VendorsDescription}

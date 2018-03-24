@@ -1,0 +1,94 @@
+if ViewThread.Type == "support"
+  h3.ui.dividing.header #{Localization.Messageboard.Support}
+else if ViewThread.Type == "transaction"
+  h3.ui.dividing.header #{Localization.Messageboard.Chat}
+else if ViewThread.Type != "private" && ViewThread.Type != "dispute"
+  h3.ui.dividing.header #{ViewThread.Title}
+
+$selectedPage = Page
+if len(Pages) > 1
+  div.ui.pagination.menu
+    each $page in Pages
+      div.item 
+        .active ? $page == $selectedPage
+        a[href="?page="+$page] #{$page}
+  div.ui.section.divider
+
+if len(ViewThread.Messages) == 0
+  div.ui.icon.yellow.message
+    i.icon.chat
+    div.content
+      div.header #{Localization.Messageboard.NoMessages}
+      p #{Localization.Messageboard.NoMessagesDescription}
+
+div.ui.comments
+  $ViewUser = ViewUser
+  $ViewThread = ViewThread
+  each $message in ViewThread.Messages
+    if $message.Text != ""
+      div.comment
+        if $message.SenderUser.Uuid != ""
+          a.avatar
+            img[src="/user-avatar/" + $message.SenderUser.Username]
+        else
+          span.avatar
+        div.content
+          if $ViewUser.IsAdmin || $ViewUser.IsStaff
+            form.right.floated
+              [method="POST"]
+              [action="/board/"+$message.Uuid+"/delete"]
+              input[type="hidden"][name="message_id"][value=$message.Uuid]
+              button.ui.mini.red.label[type="submit"]
+                i.erase.icon
+                | Erase
+              a.ui.mini.teal.label[href="/board/thread/" + $message.Uuid + "/edit"]
+                i.edit.icon
+                | Edit
+          if $message.SenderUser.Uuid != ""
+            a.author[href="/user/"+$message.SenderUser.Username] 
+              span @#{$message.SenderUser.Username}
+              if $message.SenderUser.IsAdmin
+                div.ui.tiny.label.red Admin
+              if $message.SenderUser.Premium
+                div.ui.tiny.label.teal Premium
+              if $message.SenderUser.PremiumPlus
+                div.ui.tiny.label.dark-green Premium+
+              if $message.SenderUser.IsStaff
+                div.ui.tiny.label.violet Staff
+          else
+            span.author.admin T•chka
+          div.metadata
+            span.date #{$message.CreatedAtStr}
+          pre #{$message.Text}
+          if $message.HasImage
+            img.ui.large.image[src="/board/message/" + $message.Uuid + "/image"]
+div.ui.section.divider
+form.ui.reply.form
+  [method="POST"]
+  [enctype="multipart/form-data"]
+  [class="error"] ? Error
+  if Error
+    div.ui.error.message
+      div.header #{Localization.Messageboard.Error}
+      p #{Error}
+    div.ui.section.divider
+  input[type="hidden"][name="thread_uuid"][value=ViewThread.Uuid]
+  div.field
+    label #{Localization.Messageboard.Message}
+    textarea[name="text"]
+  div.field
+    label #{Localization.Messageboard.Image}
+    div.ui.input
+      input[type="file"][name="image"][size="40"]
+  div.ui.section.divider
+  div.required.field
+    label #{Localization.Messageboard.Captcha}
+    div.ui.input
+      input[type="hidden"][name="captcha_id"][value=CaptchaId]
+      input[type="text"][name="captcha"][placeholder=Localization.Messageboard.Captcha][required]
+    div
+      img.ui.medium.image.captcha[width=300][height=100][src="/captcha/"+CaptchaId]
+  div.ui.section.divider
+  button.ui.dark-green.labeled.submit.icon.button[type="sumbit"]
+    i.icon.edit
+    | #{Localization.Messageboard.Reply}

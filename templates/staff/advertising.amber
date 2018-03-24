@@ -1,0 +1,60 @@
+extends ./../layout
+
+block left_menu
+  +leftMenu("staff")
+
+block content
+  $ViewUser = ViewUser
+  $localization = Localization
+  div.ui.divided.grid
+    div.twelve.wide.column
+      div.segment.ui
+        h2.ui.dividing.header Advertising
+        if ViewUser.IsAdmin
+          p Current cost #{AdvertisingCost}$
+          form.ui.form[method="post"]
+            [class="error"] ? Error
+            if Error
+              div.ui.error.message
+                div.header Error
+                p #{Error}
+              div.ui.section.divider
+            div.required.field
+              label New cost
+              div.ui.input
+                input[type="text"][name="cost"][size="50"][required]
+            button.ui.label.icon.dark-green[type="submit"]
+              i.icon.edit
+              | Edit          
+        if len(Advertisings)>0
+          table.ui.table.striped
+            thead
+              th Seller
+              th Items
+              th Comment
+              th All / Current count 
+              th Status
+            tbody                    
+              each $ad in Advertisings
+                if $ad.Item.Uuid != ""
+                  tr
+                    td 
+                      a[href="/user/"+$ad.Item.User.Username] #{$ad.Item.User.Username}
+                    td 
+                      a[href="/user/"+$ad.Item.User.Username+"/item/"+$ad.Item.Uuid] #{$ad.Item.Name}
+                    td.ui.word-break 
+                      #{$ad.Comment}
+                    td 
+                      #{$ad.CountImpressions} / #{$ad.CurrentCountImpressions}
+                    td
+                      if $ad.Status
+                        p Active
+                      else
+                        p Stop
+        else
+          div.ui.segment
+            p No previous advertisings
+    div.four.wide.column.t-left-menu-items
+      import ./mixin_staff_menu
+      $localization = Localization
+      +staffMenu($localization, "advertising")

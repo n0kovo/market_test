@@ -1,0 +1,42 @@
+mixin staffMenu($localization, $selectedSection)
+	div.ui.vertical.menu.tiny.basic.fluid.secondary
+		a.item.basic[href="/staff/staff"]
+			[class="active"] ? $selectedSection == "staff"
+			i.icon.users
+			span #{$localization.Staff.Staff}
+		a.item.basic[href="/staff/vendors"]
+			[class="active"] ? $selectedSection == "vendors"
+			i.ui.icon.users
+			span #{Localization.Layout.Vendors}
+		a.item.basic[href="/staff/users"] 
+			[class="active"] ? $selectedSection == "tickets"
+			i.icon.ticket
+			span Tickets
+		a.item.basic[href="/staff/items"] 
+			[class="active"] ? $selectedSection == "items"
+			i.icon.cart
+			span #{$localization.Staff.Items}
+		a.item.basic[href="/staff/disputes"] 
+			[class="active"] ? $selectedSection == "disputes"
+			i.icon.exclamation
+			span #{$localization.Staff.Disputes}
+		a.item.basic[href="/staff/feed"] 
+			[class="active"] ? $selectedSection == "feed"
+			i.icon.feed
+			span #{$localization.Staff.Actions}
+		a.item.basic[href="/staff/stats"] 
+			[class="active"] ? $selectedSection == "stats"
+			i.icon.line.chart
+			span #{$localization.Staff.Statistics}
+		a.item.basic[href="/staff/news"] 
+			[class="active"] ? $selectedSection == "news"
+			i.icon.feed
+			span News
+		a.item.basic[href="/staff/item_categories"] 
+			[class="active"] ? $selectedSection == "item_categories"
+			i.icon.sitemap
+			span Item Categories
+		a.item.basic[href="/staff/advertising"] 
+			[class="active"] ? $selectedSection == "advertising"
+			i.icon.adn
+			span Advertising

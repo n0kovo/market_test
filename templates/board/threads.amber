@@ -1,0 +1,116 @@
+extends ./../layout
+
+block menu
+  +topMenu("messageboard")
+
+block left_menu
+  +leftMenu("messageboard")
+
+block content
+  div.ui.grid.centered.divided
+    div.twelve.wide.column
+      div.segment.ui
+        h3.ui.dividing.header
+          | #{Localization.LeftMenu.Board}
+        table.ui.very.basic.table
+          tbody
+            $counter = 1
+            $l = Localization
+            each $ViewThread in ViewMessageboardThreads
+              tr
+                td
+                  h5.ui.header
+                    div.content
+                      a[href="/board/thread/" + $ViewThread.Uuid] 
+                        .is_read ? $ViewThread.IsRead
+                        | #{$ViewThread.Title}
+                      div.sub.header
+                        div
+                          i.icon.comments
+                          | #{$l.Messageboard.NumberOfMessages}: #{$ViewThread.NumberOfMessages}
+                        div
+                          i.icon.wait
+                          | #{$l.Messageboard.LastUpdated}: #{$ViewThread.LastUpdatedAtStr}
+                        if len($ViewThread.Pages) > 1
+                          div
+                            span.ui.label.tiny
+                              each $page in $ViewThread.Pages
+                                a.item
+                                  a[href="/board/thread/" + $ViewThread.Uuid + "?page="+$page] #{$page}
+                td.right.aligned.ui
+                  img.ui.mini.circular.image.right.floated[src="/user-avatar/" + $ViewThread.SenderUsername + "?size=small"]]
+                td
+                  h5.ui.header
+                    div.content
+                      a[href="/user/" + $ViewThread.SenderUsername] 
+                        | @#{$ViewThread.SenderUsername}
+                      div.sub.header 
+                        if $ViewThread.SenderIsPremiumPlus
+                          span.ui.label.dark-green.mini Premium+
+                        else if $ViewThread.SenderIsPremium
+                          span.ui.label.dark-green.mini Premium
+                        if $ViewThread.SenderIsStaff
+                          span.ui.label.orange.mini Staff
+                        else if $ViewThread.SenderIsAdmin
+                          span.ui.label.red.mini Admin
+                      div.sub.header 
+                        span #{$ViewThread.CreatedAtStr}
+        if len(Pages) > 1
+          div.ui.section.divider
+          div.ui.pagination.menu
+            $section = SelectedSectionID
+            $selectedPage = Page
+            each $page in Pages
+              div.item 
+                .active ? $page == $selectedPage
+                a[href="?section="+$section + "&page="+$page] #{$page}
+    div.four.wide.column.t-left-menu-items
+      a.ui.button.teal.tiny.fluid[href="/board/thread/new"] #{Localization.Messageboard.CreateNewThread}
+      h5.ui.dividing.header #{Localization.Messageboard.Sections}
+      $user = User
+      $selectedSection = SelectedSectionID 
+      div.ui.vertical.fluid.small.menu
+        each $section in MessageboardSections
+          div.item
+            [class="active"] ? $selectedSection==$section.ID
+            span.header
+              a
+                [href="/board/?section="+$section.ID] ? !$section.HeadingSection
+                if $section.Icon != ""
+                  i[class=$section.Icon]
+                if $section.Flag != ""
+                  i[class=$section.Flag]
+                if $user.Language == "ru"
+                  | #{$section.NameRu}
+                else if $user.Language == "de"
+                  | #{$section.NameDe}
+                else if $user.Language == "fr"
+                  | #{$section.NameFr}
+                else if $user.Language == "es"
+                  | #{$section.NameEs}
+                else
+                  | #{$section.NameEn}
+              div.ui.floated.right #{$section.NumberOfMessages}
+            if len($section.Subsections) > 0
+              div.menu
+                each $subsection in $section.Subsections
+                  div.item
+                    [class="active"] ? $selectedSection==$subsection.ID
+                    span.header
+                      a[href="/board/?section="+$subsection.ID]
+                        if $subsection.Icon != ""
+                          i[class=$subsection.Icon]
+                        if $subsection.Flag != ""
+                          i[class=$subsection.Flag]
+                        if $user.Language == "ru"
+                          | #{$subsection.NameRu}
+                        else if $user.Language == "de"
+                          | #{$subsection.NameDe}
+                        else if $user.Language == "fr"
+                          | #{$subsection.NameFr}
+                        else if $user.Language == "es"
+                          | #{$subsection.NameEs}
+                        else
+                          | #{$subsection.NameEn}
+                      div.ui.floated.right #{$subsection.NumberOfMessages}
+
