@@ -3,7 +3,6 @@ module github.com/n0kovo/market_test
 go 1.19
 
 require (
-	github.com/n0kovo/go.btcqr v0.0.0-20140508182640-2e24ce28b4cc
 	github.com/blevesearch/bleve v0.5.1-0.20170901131608-c048833fcdcf
 	github.com/blevesearch/go-porterstemmer v1.0.2
 	github.com/blevesearch/segment v0.8.0
@@ -20,6 +19,7 @@ require (
 	github.com/jinzhu/inflection v0.0.0-20170102125226-1c35d901db3d
 	github.com/lib/pq v0.0.0-20170810061220-e42267488fe3
 	github.com/microcosm-cc/bluemonday v0.0.0-20170830062424-68fecaef6026
+	github.com/n0kovo/go.btcqr v0.0.0-20140508182640-2e24ce28b4cc
 	github.com/nfnt/resize v0.0.0-20150527085445-dc93e1b98c57
 	github.com/nu7hatch/gouuid v0.0.0-20131221200532-179d4d0c4d8d
 	github.com/o1egl/govatar v0.0.0-20161228215732-b2c74b985e9a

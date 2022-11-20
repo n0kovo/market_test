@@ -4,7 +4,7 @@
 	"package": [
 		{
 			"checksumSHA1": "UcU390iszrGEQoWN+IAxZPaIBV8=",
-			"path": "code.google.com/p/rsc/gf256",
+			"path": "github.com/rsc/qr/gf256",
 			"revision": "2d8aa6027fab",
 			"revisionTime": "2014-11-30T21:07:12Z"
 		},

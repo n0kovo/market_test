@@ -1,5 +1,5 @@
 ## go.btcqr
-Package `btcqr` provides a wrapper to Russ Cox' [qr](https://godoc.org/code.google.com/p/rsc/qr) package to create QR codes following the [BIP0021](https://github.com/bitcoin/bips/blob/master/bip-0021.mediawiki) standard.
+Package `btcqr` provides a wrapper to Russ Cox' [qr](https://godoc.org/github.com/rsc/qr/qr) package to create QR codes following the [BIP0021](https://github.com/bitcoin/bips/blob/master/bip-0021.mediawiki) standard.
 
 ### Install
 Installation is easy, just use `go get`:
