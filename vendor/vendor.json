@@ -4,19 +4,19 @@
 	"package": [
 		{
 			"checksumSHA1": "UcU390iszrGEQoWN+IAxZPaIBV8=",
-			"path": "github.com/rsc/qr/gf256",
+			"path": "github.com/n0kovo/qr/gf256",
 			"revision": "2d8aa6027fab",
 			"revisionTime": "2014-11-30T21:07:12Z"
 		},
 		{
 			"checksumSHA1": "iJ30vF/OZ2n72ti8edtr/6T7PmE=",
-			"path": "github.com/rsc/qr",
+			"path": "github.com/n0kovo/qr",
 			"revision": "2d8aa6027fab",
 			"revisionTime": "2014-11-30T21:07:12Z"
 		},
 		{
 			"checksumSHA1": "4up9msiEm5nwxmdHrGkvGd7+Cq4=",
-			"path": "github.com/rsc/qr/coding",
+			"path": "github.com/n0kovo/qr/coding",
 			"revision": "2d8aa6027fab",
 			"revisionTime": "2014-11-30T21:07:12Z"
 		},

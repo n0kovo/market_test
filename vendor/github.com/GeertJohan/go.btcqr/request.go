@@ -2,7 +2,7 @@ package btcqr
 
 import (
 	"bytes"
-	"github.com/rsc/qr"
+	"github.com/n0kovo/qr"
 	"errors"
 	"net/url"
 	"strconv"
