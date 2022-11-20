@@ -4,10 +4,10 @@ Package `btcqr` provides a wrapper to Russ Cox' [qr](https://godoc.org/code.goog
 ### Install
 Installation is easy, just use `go get`:
 
-`go get github.com/GeertJohan/go.btcqr`
+`go get github.com/n0kovo/go.btcqr`
 
 ### Usage
-View [example/example.go](/example/example.go), or read the docs on [godoc.org/github.com/GeertJohan/go.btcqr](https://godoc.org/github.com/GeertJohan/go.btcqr)
+View [example/example.go](/example/example.go), or read the docs on [godoc.org/github.com/n0kovo/go.btcqr](https://godoc.org/github.com/n0kovo/go.btcqr)
 
 ### License
 This package is licensed under the ISC license. For more information view the [LICENSE](/LICENSE) file.

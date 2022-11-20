@@ -10,19 +10,19 @@
 		},
 		{
 			"checksumSHA1": "iJ30vF/OZ2n72ti8edtr/6T7PmE=",
-			"path": "code.google.com/p/rsc/qr",
+			"path": "github.com/rsc/qr",
 			"revision": "2d8aa6027fab",
 			"revisionTime": "2014-11-30T21:07:12Z"
 		},
 		{
 			"checksumSHA1": "4up9msiEm5nwxmdHrGkvGd7+Cq4=",
-			"path": "code.google.com/p/rsc/qr/coding",
+			"path": "github.com/rsc/qr/coding",
 			"revision": "2d8aa6027fab",
 			"revisionTime": "2014-11-30T21:07:12Z"
 		},
 		{
 			"checksumSHA1": "SzMuq5uFQCKO7T15OjDcEde3DgU=",
-			"path": "github.com/GeertJohan/go.btcqr",
+			"path": "github.com/n0kovo/go.btcqr",
 			"revision": "2e24ce28b4ccd659a5d65a9208ba5aecc1cdfc47",
 			"revisionTime": "2014-05-08T18:26:40Z"
 		},

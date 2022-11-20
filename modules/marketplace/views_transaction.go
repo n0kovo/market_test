@@ -5,7 +5,7 @@ import (
 	"net/http"
 	"strconv"
 
-	btcqr "github.com/GeertJohan/go.btcqr"
+	btcqr "github.com/n0kovo/go.btcqr"
 	"github.com/dchest/captcha"
 	"github.com/gocraft/web"
 
