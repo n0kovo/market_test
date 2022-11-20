@@ -9,7 +9,7 @@ import (
 
 	"github.com/dustin/go-humanize"
 	"github.com/jinzhu/gorm"
-	"github.com/o1egl/govatar"
+	"github.com/o1egl/govatar@v0.3.0"
 	"github.com/russross/blackfriday"
 	"golang.org/x/crypto/openpgp"
 	"golang.org/x/crypto/openpgp/armor"
