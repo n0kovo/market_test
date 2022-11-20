@@ -8,7 +8,7 @@ import (
 	"io/ioutil"
 	"net/http"
 	"path"
-	"qxklmrhx7qkzais6.onion/Tochka/tochka-free-market/modules/util"
+	"github.com/n0kovo/market_test/modules/util"
 	"strings"
 )
 

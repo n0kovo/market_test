@@ -11,7 +11,7 @@ import (
 
 	"golang.org/x/net/proxy"
 
-	"qxklmrhx7qkzais6.onion/Tochka/tochka-free-market/modules/settings"
+	"github.com/n0kovo/market_test/modules/settings"
 )
 
 var (

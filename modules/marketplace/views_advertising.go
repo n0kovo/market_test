@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/gocraft/web"
 	"net/http"
-	"qxklmrhx7qkzais6.onion/Tochka/tochka-free-market/modules/apis"
-	"qxklmrhx7qkzais6.onion/Tochka/tochka-free-market/modules/util"
+	"github.com/n0kovo/market_test/modules/apis"
+	"github.com/n0kovo/market_test/modules/util"
 )
 
 func (c *Context) EditAdvertisings(w web.ResponseWriter, r *web.Request) {

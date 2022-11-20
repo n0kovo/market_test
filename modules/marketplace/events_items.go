@@ -3,7 +3,7 @@ package marketplace
 import (
 	"fmt"
 
-	"qxklmrhx7qkzais6.onion/Tochka/tochka-free-market/modules/apis"
+	"github.com/n0kovo/market_test/modules/apis"
 )
 
 func EventNewItem(item Item) {

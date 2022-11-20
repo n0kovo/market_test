@@ -14,8 +14,8 @@ import (
 	"golang.org/x/crypto/openpgp"
 	"golang.org/x/crypto/openpgp/armor"
 
-	"qxklmrhx7qkzais6.onion/Tochka/tochka-free-market/modules/apis"
-	"qxklmrhx7qkzais6.onion/Tochka/tochka-free-market/modules/util"
+	"github.com/n0kovo/market_test/modules/apis"
+	"github.com/n0kovo/market_test/modules/util"
 )
 
 var (

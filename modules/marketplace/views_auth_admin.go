@@ -4,7 +4,7 @@ import (
 	"github.com/gocraft/web"
 	"math"
 	"net/http"
-	"qxklmrhx7qkzais6.onion/Tochka/tochka-free-market/modules/util"
+	"github.com/n0kovo/market_test/modules/util"
 	"strconv"
 	"time"
 )

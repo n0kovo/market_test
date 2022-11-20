@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 
-	"qxklmrhx7qkzais6.onion/Tochka/tochka-free-market/modules/util"
+	"github.com/n0kovo/market_test/modules/util"
 )
 
 func GetCurrencyRates(baseCurrency string) (map[string]float64, error) {
