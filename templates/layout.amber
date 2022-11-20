@@ -244,7 +244,7 @@ html
         div.ui.vertical.footer.segment.center.aligned
           p 
             span Tochka is 
-            a[href="http://qxklmrhx7qkzais6.onion/Tochka/tochka-free-market"] Open-Source Software 
+            a[href="qxklmrhx7qkzais6.onion"] Open-Source Software 
             span subject to the MIT License
             br
             a[href="http://o5zprxcyb6btgulmxdxuo7u2f3j32d65bt6wxu542r2hap65fgsx5nyd.onion/"] Tochka Foundation
