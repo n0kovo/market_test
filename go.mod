@@ -22,7 +22,6 @@ require (
 	github.com/microcosm-cc/bluemonday v0.0.0-20170830062424-68fecaef6026
 	github.com/nfnt/resize v0.0.0-20150527085445-dc93e1b98c57
 	github.com/nu7hatch/gouuid v0.0.0-20131221200532-179d4d0c4d8d
-	github.com/o1egl/govatar v0.0.0-20161228215732-b2c74b985e9a
 	github.com/op/go-logging v0.0.0-20150525112648-e8d5414f0947
 	github.com/russross/blackfriday v0.0.0-20170728175326-4048872b16cc
 	github.com/steveyen/gtreap v0.0.0-20150807155958-0abe01ef9be2
