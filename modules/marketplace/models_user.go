@@ -650,20 +650,6 @@ func (u UserSettingsHistory) Save() error {
 	return database.Save(&u).Error
 }
 
-func (u User) GenerateAvatar() error {
-	if u.HasAvatar {
-		return nil
-	}
-
-	err := govatar.GenerateFileFromUsername(govatar.MALE, u.Username, "data/images/"+u.Uuid+"_av.jpeg")
-	if err != nil {
-		return err
-	}
-
-	u.HasAvatar = true
-	return u.Save()
-}
-
 /*
 	View Models
 */
